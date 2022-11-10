@@ -5,6 +5,9 @@
   "main": "index.js",
   "types": "src/index.d.ts",
   "type": "module",
+  "bin": {
+    "arch-backend": "dist/index.js && npm i"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

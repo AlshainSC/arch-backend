@@ -11,7 +11,7 @@ export interface ICliOpts {
   buildPath: string
 };
 
-export interface IBuild {
+export interface IBuild{
   serverTemplate: string
   databaseTemplate: string
   ormTemplate: string
@@ -19,5 +19,11 @@ export interface IBuild {
   databaseTemplatePath: string
   ormTemplatePath: string
   ormChoice: boolean
+  databaseChoice: boolean
   buildPath: string
+}
+
+export interface IBuildConfig {
+  expressMongo: Buffer
+  expressMongoose: Buffer
 }

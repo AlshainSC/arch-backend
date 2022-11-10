@@ -1,7 +1,7 @@
 'use strict';
 //dependencies
 const Router = require('express');
-const controller = require('./controllers');
+const controller = require('../../ORM/Mongoose/controllers');
 //setup
 const router = new Router();
 //endpoints

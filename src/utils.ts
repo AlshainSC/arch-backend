@@ -1,8 +1,15 @@
 import chalk from 'chalk';
 import fs from 'fs';
-import { IBuild } from './interfaces';
+import { IBuild, IBuildConfig } from './interfaces';
 
-const { log } = console;
+const { log, info } = console;
+const expressMongoose = fs.readFileSync('/Users/alshain/Desktop/All the Things/codeworks/Solo/arch-backend/templates/json/express-mongo-mongoose/package.json')
+const expressMongo = fs.readFileSync('/Users/alshain/Desktop/All the Things/codeworks/Solo/arch-backend/templates/json/express-mongo/package.json')
+const packages: IBuildConfig = {
+  expressMongo,
+  expressMongoose
+}
+
 
 export function createDirectory(path: string) {
   if (fs.existsSync(path)) {
@@ -10,31 +17,71 @@ export function createDirectory(path: string) {
     return false;
   } else {
     fs.mkdirSync(path);
-    log(chalk.greenBright(`successfully created folder @ ${path}`))
+    log(chalk.greenBright(`successfully created ${path}`))
     return true;
   }
 };
 
 export function copyTemplate(template: IBuild) {
+
   if (fs.existsSync(`${template.buildPath}/${template.serverTemplate}`)) {
-    log(chalk.red(`folder "${template.buildPath}/${template.serverTemplate}" already exists`))
+    log(chalk.red(`folder "${template.buildPath}/${template.serverTemplate}" already exists`));
   } else {
-    fs.cp(template.serverTemplatePath, template.buildPath, {recursive: true}, () => {})
-    log(chalk.yellowBright(`successfully wrote server directory @ ${template.buildPath}`))
-  }
-  if (fs.existsSync(`${template.buildPath}/${template.databaseTemplate}`)) {
-    log(chalk.red(`folder "${template.buildPath}/${template.databaseTemplate}" already exists`))
-  } else {
-    fs.cp(template.databaseTemplatePath, template.buildPath, {recursive: true}, () => {})
-    log(chalk.cyanBright(`successfully wrote database directory @ ${template.buildPath}`))
-  }
-  if (template.ormChoice === true) {
-    if (fs.existsSync(`${template.buildPath}/${template.ormTemplate}`)) {
-      log(chalk.red(`folder "${template.buildPath}/${template.ormTemplate}" already exists`))
-    } else {
-      fs.cp(template.ormTemplatePath, template.buildPath, {recursive: true}, () => {})
-      log(chalk.magentaBright(`successfully wrote ORM directory @ ${template.buildPath}`))
+    try {
+      fs.cp(template.serverTemplatePath, template.buildPath, {recursive: true}, onComplete);
+      log(chalk.yellowBright(`successfully wrote server directory @ ${template.buildPath}`));
+    } catch (error: any) {
+      log(chalk.red('error generating server files'))
+      throw new Error(error);
     }
   }
+
+  if (template.databaseChoice === true) {
+    if (fs.existsSync(`${template.buildPath}/${template.databaseTemplate}`)) {
+      log(chalk.red(`folder "${template.buildPath}/${template.databaseTemplate}" already exists`));
+    } else {
+      try {
+        fs.cp(template.databaseTemplatePath, template.buildPath, {recursive: true}, onComplete);
+        buildPackages(template.buildPath, packages.expressMongo);
+        log(chalk.cyanBright(`successfully wrote database directory @ ${template.buildPath}`));
+      } catch (error: any) {
+        log(chalk.red('error generating database files'));
+        throw new Error(error);
+      }
+    }
+  }
+
+  if (template.ormChoice === true) {
+    if (fs.existsSync(`${template.buildPath}/${template.ormTemplate}`)) {
+      log(chalk.red(`folder "${template.buildPath}/${template.ormTemplate}" already exists`));
+    } else {
+      try {
+        fs.cp(template.ormTemplatePath, template.buildPath, {recursive: true}, onComplete);
+        buildPackages(template.buildPath, packages.expressMongoose);
+        log(chalk.magentaBright(`successfully wrote ORM directory @ ${template.buildPath}`));
+      } catch (error: any) {
+        log(chalk.red('error generating ORM files'));
+        throw new Error(error);
+      }
+    }
+  }
+
   return true;
 };
+
+function buildPackages (buildPath: string, data: Buffer) {
+  //const build = fs.cp(directory, buildPath, {recursive: true}, onComplete)
+  const build = fs.writeFile(`${buildPath}/package.json`, data, onComplete);
+  try {
+    log(chalk.green(`package built`))
+
+    return build
+  } catch (error: any) {
+    log(chalk.red('Error building package'));
+    throw new Error(error);
+  }
+}
+
+function onComplete () {
+  info('file generated')
+}

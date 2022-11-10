@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import inquirer from "inquirer";
 import { cwd } from "process";
 // import path from "path";
@@ -19,6 +21,7 @@ inquirer.prompt(Question)
     const databaseTemplatePath = `templates/Database/${databaseTemplate}`;
     const ormTemplatePath = `templates/ORM/${ormTemplate}`;
     const ormChoice = answers["use-orm"]
+    const databaseChoice = answers["use-database"];
     const buildPath = `${dir}/${name}`;
 
     const build: IBuild = {
@@ -29,6 +32,7 @@ inquirer.prompt(Question)
       databaseTemplatePath,
       ormTemplatePath,
       ormChoice,
+      databaseChoice,
       buildPath
     }
 

@@ -15,10 +15,16 @@ export const Question = [
         choices: serverChoices
     },
     {
+        name: 'use-database',
+        type: 'confirm',
+        message: 'Use a DataBase?'
+    },
+    {
         name: 'database-template',
         type: 'list',
         message: 'Choose a database template: ',
-        choices: dbChoices
+        choices: dbChoices,
+        when: (answers) => { return answers['use-database']; }
     },
     {
         name: 'use-orm',
