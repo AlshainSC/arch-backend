@@ -18,5 +18,6 @@ export interface IBuild {
   serverTemplatePath: string
   databaseTemplatePath: string
   ormTemplatePath: string
+  ormChoice: boolean
   buildPath: string
 }

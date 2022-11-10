@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const uri = /*INSERT DATABASE URI*/
 
-(async function bootstrap () {
+(async function bootstrap () { 
   try {
     await mongoose.connect(uri, () => {
       //It would be appropriate to use an ENV file
@@ -16,3 +16,4 @@ const uri = /*INSERT DATABASE URI*/
 })();
 
 module.exports = mongoose;
+

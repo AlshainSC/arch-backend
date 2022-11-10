@@ -4,6 +4,7 @@ const serverChoices = fs.readdirSync('templates/Server');
 const dbChoices = fs.readdirSync('templates/Database');
 const ormChoices = fs.readdirSync('templates/ORM');
 
+
 export const Question = [
   {
     name: 'name',
@@ -11,21 +12,27 @@ export const Question = [
     message: 'Back-end name: '
   },
   {
-    name: 'server template',
+    name: 'server-template',
     type: 'list',
     message: 'Choose a server template: ',
     choices: serverChoices
   },
   {
-    name: 'database template',
+    name: 'database-template',
     type: 'list',
     message: 'Choose a database template: ',
     choices: dbChoices
   },
   {
-    name: 'orm template',
+    name: 'use-orm',
+    type: 'confirm',
+    message: 'Use an ORM?',
+  },
+  {
+    name: 'orm-template',
     type: 'list',
     message: 'Choose an ORM: ',
-    choices: ormChoices
+    choices: ormChoices,
+    when: (answers: Record<string, any>) => {return answers['use-orm']}
   }
 ];
