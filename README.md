@@ -1,5 +1,9 @@
 # arch-backend
-Server and database file generation following MVC patterns.  
+Server and database file generation following MVC patterns.
+
+# VERY IMPORTANT NOTE
+This package as of first initial release only functions for mongo/mongoose/express
+Probably don't use this just yet, I'm working on it. 
 
 ## TODOS 09.11.22
 > --> CLI user interface.  
