@@ -6,9 +6,9 @@ import { Question } from "./questionnaire.js";
 import { createDirectory, copyTemplate } from "./utils.js";
 const dir = cwd();
 const { log } = console;
-const srvPath = path.join(path.resolve(dir)) + '/templates/Server/';
-const dbPath = path.join(path.resolve(dir)) + '/templates/Database/';
-const ormPath = path.join(path.resolve(dir)) + '/templates/ORM/';
+const srvPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Server/';
+const dbPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Database/';
+const ormPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/ORM/';
 inquirer.prompt(Question)
     .then((answers) => {
     const name = answers["name"];
