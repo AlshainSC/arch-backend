@@ -1,7 +1,13 @@
 import fs from "fs";
-const serverChoices = fs.readdirSync('templates/Server');
-const dbChoices = fs.readdirSync('templates/Database');
-const ormChoices = fs.readdirSync('templates/ORM');
+import path from "path";
+import { cwd } from "process";
+const dir = cwd();
+const srvPath = path.join(path.resolve(dir)) + '/templates/Server/';
+const dbPath = path.join(path.resolve(dir)) + '/templates/Database/';
+const ormPath = path.join(path.resolve(dir)) + '/templates/ORM/';
+const serverChoices = fs.readdirSync(srvPath);
+const dbChoices = fs.readdirSync(dbPath);
+const ormChoices = fs.readdirSync(ormPath);
 export const Question = [
     {
         name: 'name',

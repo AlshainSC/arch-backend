@@ -6,14 +6,24 @@
   "types": "src/index.d.ts",
   "type": "module",
   "bin": {
-    "arch-backend": "dist/index.js && npm i"
+    "arch-backend": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "mongo",
+    "mongoose",
+    "template",
+    "generation",
+    "backend",
+    "server",
+    "database",
+    "orm"
+  ],
   "author": "AlshainSC nicholas.m.larson@gmail.com",
   "license": "ISC",
   "dependencies": {
