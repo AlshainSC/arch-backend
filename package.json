@@ -2,15 +2,15 @@
   "name": "arch-backend",
   "version": "0.0.5",
   "description": "",
-  "main": "index.js",
-  "types": "src/index.d.ts",
+  "main": "./bin/index.js",
+  "types": "./src/index.d.ts",
   "type": "module",
   "bin": {
-    "arch-backend": "dist/index.js"
+    "arch-backend": "./bin/index.js"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node ./bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
