@@ -1,4 +1,4 @@
-#! /arch-backend/bin/env node
+#! /usr/bin/env node
 
 import shell from 'shelljs';
 
