@@ -1,22 +1,23 @@
 import chalk from 'chalk';
 import path from 'path';
-import fs from 'fs';
+import { readFileSync, existsSync, mkdirSync, cpSync, writeFileSync } from 'fs';
 import { IBuild, IBuildConfig } from './interfaces.js';
-import { cwd } from 'process';
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import shell from 'shelljs';
 
+//ES6 <-> CJS __dirname workaround
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
-// const dirname = path.resolve('/usr/local/lib')
-//dirname, '/node_modules/arch-backend/templates'
-
+//aesthetic
 const { log, info } = console;
 
-const expressMongoose = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo-mongoose/package.json'));
-const expressMongo = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo/package.json'));
+//package constants
+//TODO use a new question for this instead, this will get very messy with more template combinations
+const expressMongoose = readFileSync(path.join(__dirname, '/templates/json/express-mongo-mongoose/package.json'));
+const expressMongo = readFileSync(path.join(__dirname, '/templates/json/express-mongo/package.json'));
 const packages: IBuildConfig = {
   expressMongo,
   expressMongoose
@@ -24,11 +25,11 @@ const packages: IBuildConfig = {
 
 
 export function createDirectory(path: string) {
-  if (fs.existsSync(path)) {
+  if (existsSync(path)) {
     log(chalk.red(`folder "${path}" already exists`))
     return false;
   } else {
-    fs.mkdirSync(path);
+    mkdirSync(path);
     log(chalk.greenBright(`successfully created ${path}`))
     return true;
   }
@@ -36,26 +37,39 @@ export function createDirectory(path: string) {
 
 export function copyTemplate(template: IBuild) {
 
-  if (fs.existsSync(`${template.buildPath}/${template.serverTemplate}`)) {
-    log(chalk.red(`folder "${template.buildPath}/${template.serverTemplate}" already exists`));
+  const {
+    buildPath,
+    serverTemplate,
+    databaseTemplate,
+    ormTemplate,
+    databaseChoice,
+    ormChoice,
+    serverTemplatePath,
+    databaseTemplatePath,
+    ormTemplatePath,
+  } = template;
+
+  //check if directory already exists and error if it does
+  if (existsSync(`${buildPath}/${serverTemplate}`)) {
+    log(chalk.red(`folder "${buildPath}/${serverTemplate}" already exists`));
   } else {
     try {
-      fs.cp(template.serverTemplatePath, template.buildPath, {recursive: true}, onComplete);
-      log(chalk.yellowBright(`successfully wrote server directory @ ${template.buildPath}`));
+      //Async file copy
+      cpSync(serverTemplatePath, buildPath, {recursive: true});
+      log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
     } catch (error: any) {
       log(chalk.red('error generating server files'))
       throw new Error(error);
     }
   }
 
-  if (template.databaseChoice === true) {
-    if (fs.existsSync(`${template.buildPath}/${template.databaseTemplate}`)) {
-      log(chalk.red(`folder "${template.buildPath}/${template.databaseTemplate}" already exists`));
+  if (databaseChoice === true) {
+    if (existsSync(`${buildPath}/${databaseTemplate}`)) {
+      log(chalk.red(`folder "${buildPath}/${databaseTemplate}" already exists`));
     } else {
       try {
-        fs.cp(template.databaseTemplatePath, template.buildPath, {recursive: true}, onComplete);
-        buildPackages(template.buildPath, packages.expressMongo);
-        log(chalk.cyanBright(`successfully wrote database directory @ ${template.buildPath}`));
+        cpSync(databaseTemplatePath, buildPath, {recursive: true});
+        buildPackages(buildPath, packages.expressMongo);
       } catch (error: any) {
         log(chalk.red('error generating database files'));
         throw new Error(error);
@@ -63,30 +77,31 @@ export function copyTemplate(template: IBuild) {
     }
   }
 
-  if (template.ormChoice === true) {
-    if (fs.existsSync(`${template.buildPath}/${template.ormTemplate}`)) {
-      log(chalk.red(`folder "${template.buildPath}/${template.ormTemplate}" already exists`));
+  if (ormChoice === true) {
+    if (existsSync(`${buildPath}/${ormTemplate}`)) {
+      log(chalk.red(`folder "${buildPath}/${ormTemplate}" already exists`));
     } else {
       try {
-        fs.cp(template.ormTemplatePath, template.buildPath, {recursive: true}, onComplete);
-        buildPackages(template.buildPath, packages.expressMongoose);
-        log(chalk.magentaBright(`successfully wrote ORM directory @ ${template.buildPath}`));
+        cpSync(ormTemplatePath, buildPath, {recursive: true});
+        buildPackages(buildPath, packages.expressMongoose);
+        installPackages(buildPath)
       } catch (error: any) {
         log(chalk.red('error generating ORM files'));
         throw new Error(error);
       }
     }
+  } else {
+    installPackages(buildPath);
   }
 
+  
   return true;
 };
 
 function buildPackages (buildPath: string, data: Buffer) {
-  //const build = fs.cp(directory, buildPath, {recursive: true}, onComplete)
-  const build = fs.writeFile(`${buildPath}/package.json`, data, onComplete);
-  try {
-    log(chalk.green(`package built`))
 
+  const build = writeFileSync(`${buildPath}/package.json`, data);
+  try {
     return build
   } catch (error: any) {
     log(chalk.red('Error building package'));
@@ -94,6 +109,17 @@ function buildPackages (buildPath: string, data: Buffer) {
   }
 }
 
-function onComplete () {
-  info('file generated')
+//TODO Add loader bar to this
+function installPackages (buildPath: string) {
+  shell.cd(buildPath);
+  if (shell.exec('npm i').code === 0) {
+    shell.exit(0);
+  }
+  
 }
+
+/*
+function onComplete () {
+  info(chalk.bgGreenBright('file generated'))
+}
+*/

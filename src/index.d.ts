@@ -1,1 +1,1 @@
-//declare module 'inquirer';
+declare module 'shell';

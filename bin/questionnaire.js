@@ -4,8 +4,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// const __dirname = path.resolve('/usr/local/lib')
-//path.resolve(__dirname)) + '/node_modules/arch-backend
 const srvPath = path.join(__dirname, '/templates/Server/');
 const dbPath = path.join(__dirname, '/templates/Database/');
 const ormPath = path.join(__dirname, '/templates/ORM/');
@@ -47,5 +45,10 @@ export const Question = [
         message: 'Choose an ORM: ',
         choices: ormChoices,
         when: (answers) => { return answers['use-orm']; }
+    },
+    {
+        name: 'install',
+        type: 'confirm',
+        message: 'Would you like to install dependencies for your new backend?'
     }
 ];

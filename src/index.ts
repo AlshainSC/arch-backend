@@ -2,6 +2,7 @@
 
 import inquirer from "inquirer";
 import { cwd } from "process";
+import shell from 'shelljs';
 import path from "path";
 import { Question } from "./questionnaire.js"
 import { IBuild, ICliOpts } from "./interfaces.js";
@@ -35,6 +36,7 @@ inquirer.prompt(Question)
     const ormChoice = answers["use-orm"]
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
+    const choice = answers['install']
 
     const build: IBuild = {
       serverTemplate,
@@ -56,33 +58,23 @@ inquirer.prompt(Question)
       serverTemplatePath,
       databaseTemplatePath,
       ormTemplatePath,
-      buildPath
+      buildPath,
     }
-    log(options);
-
-    //create directory
+      //create directory
     if (!createDirectory(options.name)) {
       log('something went wrong')
       return;
     }
     //populate directory based on input templates
     if (!copyTemplate(build)) {
-      log('something went wrong WHILE COPYING')
+        log('something went wrong WHILE COPYING')
       return;
     }
+    
   })
   .catch((err) => {
     console.error(err);
 });
-
-
-
-
-
-
-
-
-
 
 // const answers: Record<string, any> = inquirer.prompt(Question);
 

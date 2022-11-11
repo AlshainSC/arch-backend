@@ -27,6 +27,7 @@ inquirer.prompt(Question)
     const ormChoice = answers["use-orm"];
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
+    const choice = answers['install'];
     const build = {
         serverTemplate,
         databaseTemplate,
@@ -46,9 +47,8 @@ inquirer.prompt(Question)
         serverTemplatePath,
         databaseTemplatePath,
         ormTemplatePath,
-        buildPath
+        buildPath,
     };
-    log(options);
     //create directory
     if (!createDirectory(options.name)) {
         log('something went wrong');
