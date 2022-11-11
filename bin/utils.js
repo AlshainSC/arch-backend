@@ -1,10 +1,11 @@
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
-const __dirname = path.resolve('/usr/local/lib');
+// const dirname = path.resolve('/usr/local/lib')
+//dirname, '/node_modules/arch-backend/templates'
 const { log, info } = console;
-const expressMongoose = fs.readFileSync(path.join(__dirname, '/node_modules/arch-backend/templates', '/json/express-mongo-mongoose/package.json'));
-const expressMongo = fs.readFileSync(path.join(__dirname, '/node_modules/arch-backend/templates', '/json/express-mongo/package.json'));
+const expressMongoose = fs.readFileSync(path.join('./templates/json/express-mongo-mongoose/package.json'));
+const expressMongo = fs.readFileSync(path.join('./templates/json/express-mongo/package.json'));
 const packages = {
     expressMongo,
     expressMongoose

@@ -7,12 +7,13 @@ import { Question } from "./questionnaire.js"
 import { IBuild, ICliOpts } from "./interfaces.js";
 import { createDirectory, copyTemplate } from "./utils.js";
 
-const __dirname = path.resolve('/usr/local/lib')
+// const dirname = path.resolve('/usr/local/lib')
+//path.resolve(dirname)) + 
 const buildDir = path.resolve(cwd());
 const { log } = console;
-const srvPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/Server/';
-const dbPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/Database/';
-const ormPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/ORM/';
+const srvPath = path.join('./templates/Server/');
+const dbPath = path.join('./templates/Database/');
+const ormPath = path.join('./templates/ORM/');
 
 inquirer.prompt(Question)
   .then((answers: Record<string, any>) => {
