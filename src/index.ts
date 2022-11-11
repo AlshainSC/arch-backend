@@ -9,11 +9,12 @@ import { createDirectory, copyTemplate } from "./utils.js";
 
 // const dirname = path.resolve('/usr/local/lib')
 //path.resolve(dirname)) + 
+
 const buildDir = path.resolve(cwd());
 const { log } = console;
-const srvPath = path.join('./templates/Server/');
-const dbPath = path.join('./templates/Database/');
-const ormPath = path.join('./templates/ORM/');
+const srvPath = path.join(__dirname, '/templates/Server/');
+const dbPath = path.join(__dirname, '/templates/Database/');
+const ormPath = path.join(__dirname, '/templates/ORM/');
 
 inquirer.prompt(Question)
   .then((answers: Record<string, any>) => {

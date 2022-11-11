@@ -3,9 +3,9 @@ import path from "path";
 import { cwd } from "process";
 // const __dirname = path.resolve('/usr/local/lib')
 //path.resolve(__dirname)) + '/node_modules/arch-backend
-const srvPath = path.join('./templates/Server/');
-const dbPath = path.join('./templates/Database/');
-const ormPath = path.join('./templates/ORM/');
+const srvPath = path.join(__dirname, '/templates/Server/');
+const dbPath = path.join(__dirname, '/templates/Database/');
+const ormPath = path.join(__dirname, '/templates/ORM/');
 const serverChoices = fs.readdirSync(srvPath);
 const dbChoices = fs.readdirSync(dbPath);
 const ormChoices = fs.readdirSync(ormPath);
