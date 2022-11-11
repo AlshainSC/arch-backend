@@ -1,20 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Question = void 0;
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
+import fs from "fs";
+import path from "path";
 // const __dirname = path.resolve('/usr/local/lib')
 //path.resolve(__dirname)) + '/node_modules/arch-backend
-const srvPath = path_1.default.join(__dirname, '/templates/Server/');
-const dbPath = path_1.default.join(__dirname, '/templates/Database/');
-const ormPath = path_1.default.join(__dirname, '/templates/ORM/');
-const serverChoices = fs_1.default.readdirSync(srvPath);
-const dbChoices = fs_1.default.readdirSync(dbPath);
-const ormChoices = fs_1.default.readdirSync(ormPath);
-exports.Question = [
+const srvPath = path.join(__dirname, '/templates/Server/');
+const dbPath = path.join(__dirname, '/templates/Database/');
+const ormPath = path.join(__dirname, '/templates/ORM/');
+const serverChoices = fs.readdirSync(srvPath);
+const dbChoices = fs.readdirSync(dbPath);
+const ormChoices = fs.readdirSync(ormPath);
+export const Question = [
     {
         name: 'name',
         type: 'input',

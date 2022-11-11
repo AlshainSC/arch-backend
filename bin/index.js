@@ -1,22 +1,17 @@
 #!/usr/bin/env node
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const inquirer_1 = __importDefault(require("inquirer"));
-const process_1 = require("process");
-const path_1 = __importDefault(require("path"));
-const questionnaire_js_1 = require("./questionnaire.cjs");
-const utils_js_1 = require("./utils.cjs");
+import inquirer from "inquirer";
+import { cwd } from "process";
+import path from "path";
+import { Question } from "./questionnaire.js";
+import { createDirectory, copyTemplate } from "./utils.js";
 // const dirname = path.resolve('/usr/local/lib')
 //path.resolve(dirname)) + 
-const buildDir = path_1.default.resolve((0, process_1.cwd)());
+const buildDir = path.resolve(cwd());
 const { log } = console;
-const srvPath = path_1.default.join(__dirname, '/templates/Server/');
-const dbPath = path_1.default.join(__dirname, '/templates/Database/');
-const ormPath = path_1.default.join(__dirname, '/templates/ORM/');
-inquirer_1.default.prompt(questionnaire_js_1.Question)
+const srvPath = path.join(__dirname, '/templates/Server/');
+const dbPath = path.join(__dirname, '/templates/Database/');
+const ormPath = path.join(__dirname, '/templates/ORM/');
+inquirer.prompt(Question)
     .then((answers) => {
     const name = answers["name"];
     const serverTemplate = answers["server-template"];
@@ -51,12 +46,12 @@ inquirer_1.default.prompt(questionnaire_js_1.Question)
     };
     log(options);
     //create directory
-    if (!(0, utils_js_1.createDirectory)(options.name)) {
+    if (!createDirectory(options.name)) {
         log('something went wrong');
         return;
     }
     //populate directory based on input templates
-    if (!(0, utils_js_1.copyTemplate)(build)) {
+    if (!copyTemplate(build)) {
         log('something went wrong WHILE COPYING');
         return;
     }

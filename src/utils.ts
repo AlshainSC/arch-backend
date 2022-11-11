@@ -4,10 +4,13 @@ import fs from 'fs';
 import { IBuild, IBuildConfig } from './interfaces.js';
 import { cwd } from 'process';
 
+
 // const dirname = path.resolve('/usr/local/lib')
 //dirname, '/node_modules/arch-backend/templates'
 
 const { log, info } = console;
+
+log(chalk)
 
 const expressMongoose = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo-mongoose/package.json'));
 const expressMongo = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo/package.json'));
