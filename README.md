@@ -1,7 +1,26 @@
-# V1.0.20
+# V 0.1.0
 --> Generates template files w/ support for MongoDB, Mongoose, and Express  
 --> These are basic, but functional.  Variable names are commented and should be replaced with your own.  
 --> Some examples provided, more to follow.  
+
+===========================================  
+
+# Installation and Usage 
+To install:  
+
+    npm i -g arch-backend  
+    
+To run the tool:  
+
+> In your project, if you haven't already:  
+
+    npm init  
+    
+> Then:  
+
+    arch-backend  
+
+> In the directory you wish to create your server architecture in.  
 
 ===========================================  
 
