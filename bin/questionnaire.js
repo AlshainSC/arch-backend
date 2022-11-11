@@ -1,10 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { cwd } from "process";
-const dir = cwd();
-const srvPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Server/';
-const dbPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Database/';
-const ormPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/ORM/';
+const __dirname = path.resolve('/usr/local/lib');
+const srvPath = path.join(path.resolve(__dirname)) + '/node_modules/arch-backend/templates/Server/';
+const dbPath = path.join(path.resolve(__dirname)) + '/node_modules/arch-backend/templates/Database/';
+const ormPath = path.join(path.resolve(__dirname)) + '/node_modules/arch-backend/templates/ORM/';
 const serverChoices = fs.readdirSync(srvPath);
 const dbChoices = fs.readdirSync(dbPath);
 const ormChoices = fs.readdirSync(ormPath);

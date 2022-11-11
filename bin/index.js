@@ -4,11 +4,12 @@ import { cwd } from "process";
 import path from "path";
 import { Question } from "./questionnaire.js";
 import { createDirectory, copyTemplate } from "./utils.js";
-const dir = cwd();
+const __dirname = path.resolve('/usr/local/lib');
+const buildDir = path.resolve(cwd());
 const { log } = console;
-const srvPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Server/';
-const dbPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/Database/';
-const ormPath = path.join(path.resolve(dir)) + '/node_modules/arch-backend/templates/ORM/';
+const srvPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/Server/';
+const dbPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/Database/';
+const ormPath = path.join(path.resolve(__dirname)) + '/arch-backend/templates/ORM/';
 inquirer.prompt(Question)
     .then((answers) => {
     const name = answers["name"];
@@ -20,7 +21,7 @@ inquirer.prompt(Question)
     const ormTemplatePath = `${ormPath}${ormTemplate}`;
     const ormChoice = answers["use-orm"];
     const databaseChoice = answers["use-database"];
-    const buildPath = `${dir}/${name}`;
+    const buildPath = `${buildDir}/${name}`;
     const build = {
         serverTemplate,
         databaseTemplate,
