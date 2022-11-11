@@ -15,8 +15,6 @@ const __dirname = dirname(__filename);
 
 const { log, info } = console;
 
-log(chalk)
-
 const expressMongoose = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo-mongoose/package.json'));
 const expressMongo = fs.readFileSync(path.join(__dirname, '/templates/json/express-mongo/package.json'));
 const packages: IBuildConfig = {
