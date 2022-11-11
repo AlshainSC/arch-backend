@@ -16,6 +16,7 @@ const __dirname = dirname(__filename);
 //path.resolve(dirname)) + 
 
 const buildDir = path.resolve(cwd());
+
 const { log } = console;
 const srvPath = path.join(__dirname, '/templates/Server/');
 const dbPath = path.join(__dirname, '/templates/Database/');
