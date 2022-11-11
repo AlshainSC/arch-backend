@@ -3,6 +3,11 @@ import path from 'path';
 import fs from 'fs';
 import { IBuild, IBuildConfig } from './interfaces.js';
 import { cwd } from 'process';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 // const dirname = path.resolve('/usr/local/lib')

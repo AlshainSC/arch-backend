@@ -1,6 +1,12 @@
 import fs from "fs";
 import path from "path";
 import { cwd } from "process";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // const __dirname = path.resolve('/usr/local/lib')
 //path.resolve(__dirname)) + '/node_modules/arch-backend
 const srvPath = path.join(__dirname, '/templates/Server/');

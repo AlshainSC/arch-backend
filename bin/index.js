@@ -4,6 +4,10 @@ import { cwd } from "process";
 import path from "path";
 import { Question } from "./questionnaire.js";
 import { createDirectory, copyTemplate } from "./utils.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 // const dirname = path.resolve('/usr/local/lib')
 //path.resolve(dirname)) + 
 const buildDir = path.resolve(cwd());

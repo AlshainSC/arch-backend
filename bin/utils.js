@@ -1,6 +1,10 @@
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 // const dirname = path.resolve('/usr/local/lib')
 //dirname, '/node_modules/arch-backend/templates'
 const { log, info } = console;
