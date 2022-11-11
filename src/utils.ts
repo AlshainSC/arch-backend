@@ -4,7 +4,7 @@ import fs from 'fs';
 import { IBuild, IBuildConfig } from './interfaces';
 import { cwd } from 'process';
 
-const __dirname = path.resolve(cwd())
+const __dirname = path.resolve()
 
 const { log, info } = console;
 
