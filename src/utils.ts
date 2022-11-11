@@ -4,7 +4,7 @@ import fs from 'fs';
 import { IBuild, IBuildConfig } from './interfaces';
 import { cwd } from 'process';
 
-const __dirname = path.resolve()
+const __dirname = path.resolve('/usr/local/lib')
 
 const { log, info } = console;
 
