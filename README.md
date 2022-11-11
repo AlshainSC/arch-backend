@@ -29,9 +29,11 @@ Probably don't use this just yet, I'm working on it.
 >> --> Databases:  
 >>> --> MySQL  
 >>> --> PostgreSQL  
+
 >> --> Servers:   
 >>> --> Koa  
 >>> --> Bare NodeJS  
+
 >> --> ORM:  
 >>> --> Prisma  
 >>> --> Sequelize  
