@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs';
-import { IBuild, IBuildConfig } from './interfaces';
+import { IBuild, IBuildConfig } from './interfaces.js';
 import { cwd } from 'process';
 
 // const dirname = path.resolve('/usr/local/lib')
