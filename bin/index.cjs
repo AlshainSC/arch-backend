@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = __importDefault(require("inquirer"));
 const process_1 = require("process");
 const path_1 = __importDefault(require("path"));
-const questionnaire_js_1 = require("./questionnaire.js");
-const utils_js_1 = require("./utils.js");
+const questionnaire_js_1 = require("./questionnaire.cjs");
+const utils_js_1 = require("./utils.cjs");
 // const dirname = path.resolve('/usr/local/lib')
 //path.resolve(dirname)) + 
 const buildDir = path_1.default.resolve((0, process_1.cwd)());
