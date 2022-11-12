@@ -1,3 +1,4 @@
+'use strict'
 const { MongoClient } = require('mongodb');
 
 const uri = /*'CONNECTION STRING TO YOUR DATABASE GOES HERE'*/

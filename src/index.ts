@@ -31,12 +31,12 @@ inquirer.prompt(Question)
     const databaseTemplate = answers["database-template"];
     const ormTemplate = answers["orm-template"];
     const serverTemplatePath = `${srvPath}${serverTemplate}`;
-    const databaseTemplatePath = `${dbPath}${databaseTemplate}`;
+    const databaseTemplatePath = `${dbPath}${databaseTemplate}/${serverTemplate}`;
     const ormTemplatePath = `${ormPath}${ormTemplate}`;
     const ormChoice = answers["use-orm"]
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
-    const choice = answers['install']
+    const installChoice = answers['install']
 
     const build: IBuild = {
       serverTemplate,
@@ -47,7 +47,8 @@ inquirer.prompt(Question)
       ormTemplatePath,
       ormChoice,
       databaseChoice,
-      buildPath
+      buildPath,
+      installChoice
     }
 
     const options: ICliOpts = {

@@ -47,6 +47,7 @@ export function copyTemplate(template: IBuild) {
     serverTemplatePath,
     databaseTemplatePath,
     ormTemplatePath,
+    installChoice
   } = template;
 
   //check if directory already exists and error if it does
@@ -54,7 +55,7 @@ export function copyTemplate(template: IBuild) {
     log(chalk.red(`folder "${buildPath}/${serverTemplate}" already exists`));
   } else {
     try {
-      //Async file copy
+      //synchronous file copy
       cpSync(serverTemplatePath, buildPath, {recursive: true});
       log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
     } catch (error: any) {
@@ -68,7 +69,12 @@ export function copyTemplate(template: IBuild) {
       log(chalk.red(`folder "${buildPath}/${databaseTemplate}" already exists`));
     } else {
       try {
-        cpSync(databaseTemplatePath, buildPath, {recursive: true});
+        cpSync(databaseTemplatePath, buildPath, {
+          recursive: true,
+          filter: (source) => {
+            return source.includes(serverTemplate);
+          }
+        });
         buildPackages(buildPath, packages.expressMongo);
       } catch (error: any) {
         log(chalk.red('error generating database files'));
@@ -84,14 +90,18 @@ export function copyTemplate(template: IBuild) {
       try {
         cpSync(ormTemplatePath, buildPath, {recursive: true});
         buildPackages(buildPath, packages.expressMongoose);
-        installPackages(buildPath)
+        if (installChoice){
+          installPackages(buildPath)
+        }
       } catch (error: any) {
         log(chalk.red('error generating ORM files'));
         throw new Error(error);
       }
     }
   } else {
-    installPackages(buildPath);
+    if (installChoice) {
+      installPackages(buildPath);
+    }
   }
 
   

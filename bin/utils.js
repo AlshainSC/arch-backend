@@ -30,14 +30,14 @@ export function createDirectory(path) {
 }
 ;
 export function copyTemplate(template) {
-    const { buildPath, serverTemplate, databaseTemplate, ormTemplate, databaseChoice, ormChoice, serverTemplatePath, databaseTemplatePath, ormTemplatePath, } = template;
+    const { buildPath, serverTemplate, databaseTemplate, ormTemplate, databaseChoice, ormChoice, serverTemplatePath, databaseTemplatePath, ormTemplatePath, installChoice } = template;
     //check if directory already exists and error if it does
     if (existsSync(`${buildPath}/${serverTemplate}`)) {
         log(chalk.red(`folder "${buildPath}/${serverTemplate}" already exists`));
     }
     else {
         try {
-            //Async file copy
+            //synchronous file copy
             cpSync(serverTemplatePath, buildPath, { recursive: true });
             log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
         }
@@ -52,7 +52,12 @@ export function copyTemplate(template) {
         }
         else {
             try {
-                cpSync(databaseTemplatePath, buildPath, { recursive: true });
+                cpSync(databaseTemplatePath, buildPath, {
+                    recursive: true,
+                    filter: (source) => {
+                        return source.includes(serverTemplate);
+                    }
+                });
                 buildPackages(buildPath, packages.expressMongo);
             }
             catch (error) {
@@ -69,7 +74,9 @@ export function copyTemplate(template) {
             try {
                 cpSync(ormTemplatePath, buildPath, { recursive: true });
                 buildPackages(buildPath, packages.expressMongoose);
-                installPackages(buildPath);
+                if (installChoice) {
+                    installPackages(buildPath);
+                }
             }
             catch (error) {
                 log(chalk.red('error generating ORM files'));
@@ -78,7 +85,9 @@ export function copyTemplate(template) {
         }
     }
     else {
-        installPackages(buildPath);
+        if (installChoice) {
+            installPackages(buildPath);
+        }
     }
     return true;
 }
@@ -93,6 +102,7 @@ function buildPackages(buildPath, data) {
         throw new Error(error);
     }
 }
+//TODO Add loader bar to this
 function installPackages(buildPath) {
     shell.cd(buildPath);
     if (shell.exec('npm i').code === 0) {

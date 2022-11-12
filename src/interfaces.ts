@@ -21,6 +21,7 @@ export interface IBuild{
   ormChoice: boolean
   databaseChoice: boolean
   buildPath: string
+  installChoice: boolean
 }
 
 export interface IBuildConfig {

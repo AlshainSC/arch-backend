@@ -25,14 +25,16 @@ export const Question = [
     {
         name: 'use-database',
         type: 'confirm',
-        message: 'Use a DataBase?'
+        message: 'Use a database?'
     },
     {
         name: 'database-template',
         type: 'list',
         message: 'Choose a database template: ',
         choices: dbChoices,
-        when: (answers) => { return answers['use-database']; }
+        when: (answers) => {
+            return answers['use-database'];
+        }
     },
     {
         name: 'use-orm',
@@ -44,7 +46,9 @@ export const Question = [
         type: 'list',
         message: 'Choose an ORM: ',
         choices: ormChoices,
-        when: (answers) => { return answers['use-orm']; }
+        when: (answers) => {
+            return answers['use-orm'];
+        }
     },
     {
         name: 'install',
