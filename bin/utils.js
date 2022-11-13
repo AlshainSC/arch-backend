@@ -4,6 +4,7 @@ import { readFileSync, existsSync, mkdirSync, cpSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import shell from 'shelljs';
+import cliProgress from 'cli-progress';
 //ES6 <-> CJS __dirname workaround
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -76,6 +77,10 @@ export function copyTemplate(template) {
                 buildPackages(buildPath, packages.expressMongoose);
                 if (installChoice) {
                     installPackages(buildPath);
+                    const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
+                    bar.start(200, 0);
+                    bar.update(100);
+                    bar.stop();
                 }
             }
             catch (error) {
@@ -87,6 +92,10 @@ export function copyTemplate(template) {
     else {
         if (installChoice) {
             installPackages(buildPath);
+            const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
+            bar.start(200, 0);
+            bar.update(100);
+            bar.stop();
         }
     }
     return true;
