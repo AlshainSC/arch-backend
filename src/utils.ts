@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //aesthetic
-const { log, info } = console;
+const { log } = console;
 
 export function createDirectory(path: string) {
   if (existsSync(path)) {

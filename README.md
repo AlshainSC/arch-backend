@@ -27,16 +27,17 @@ To run the tool:
 
 ===========================================  
 # V 0.2.0
---> Generates template files w/ support for Express/Koa, MongoDB, Mongoose, and Express  
+--> Generates template files w/ support for: Express/Koa, MongoDB/PostgreSQL, Mongoose/Sequelize 
 --> These are basic, but functional.  Variable names are commented and should be replaced with your own.  
 --> Some examples provided, more to follow.  
 
 ===========================================  
 
 # VERY IMPORTANT NOTE
-This package only functions for mongo/mongoose/express-koa and is in a rough alpha phase.  
-Probably don't use this just yet, I'm working on it. 
-
+This package is in its early stages.  Current templates generated are very basic boilerplate and HAVE NOT YET BEEN TESTED.  
+If you would like to contribute to this project, raise issues, or raise an issue, please see: https://github.com/AlshainSC/arch-backend  
+  
+If you like this project and would like to support the poor and exhausted student developing it, please see:  https://ko-fi.com/alshain
 ===========================================  
 
 ## TODOS 11.11.22
@@ -45,7 +46,7 @@ Probably don't use this just yet, I'm working on it.
 > --> Add support for:  
 >> --> Databases:  
 >>> --> Redis  
->>> --> PostgreSQL  
+>>> --> ~~PostgreSQL~~  
 
 >> --> Servers:   
 >>> --> ~~Koa~~  
@@ -53,7 +54,7 @@ Probably don't use this just yet, I'm working on it.
 
 >> --> ORM:  
 >>> --> Prisma  
->>> --> Sequelize  
+>>> --> ~~Sequelize~~  
 
 ===========================================  
 ## End Goals
