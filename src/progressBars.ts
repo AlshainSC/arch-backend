@@ -67,6 +67,16 @@ export default function progressBar() {
 function onComplete () {
         log(chalk.bgGreenBright('\n' + 'File Generation Successful, Happy Coding!'))
     }
+
+
+
+
+
+
+
+
+
+    
 // export const progressBar = () => {
 //   let n = 0;
 //   let time = 100;
