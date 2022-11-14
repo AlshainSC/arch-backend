@@ -64,12 +64,12 @@ inquirer
     };
     //create directory
     if (!createDirectory(options.name)) {
-      log("something went wrong");
+      log("Error creating Directory");
       return;
     }
     //populate directory based on input templates
     if (!copyTemplate(build)) {
-      log("something went wrong WHILE COPYING");
+      log("Error while generating templates");
       return;
     }
     

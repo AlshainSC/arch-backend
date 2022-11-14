@@ -6,10 +6,11 @@
   "author": "alshain",
   "license": "UNLICENSED",
   "dependencies": {
-    "koa": "^2.13.1",
-    "koa-bodyparser": "^4.3.0",
-    "koa-router": "^10.0.0",
-    "koa-static": "^5.0.0",
-    "@koa/cors": "^4.0.0"
+    "koa": "latest",
+    "koa-bodyparser": "latest",
+    "koa-router": "latest",
+    "koa-static": "latest",
+    "@koa/cors": "latest",
+    "mongodb": "latest"
   }
 }

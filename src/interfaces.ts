@@ -24,7 +24,17 @@ export interface IBuild{
   installChoice: boolean
 }
 
-export interface IBuildConfig {
-  expressMongo: Buffer
-  expressMongoose: Buffer
+// export interface IBuildConfig {
+//   express: Buffer
+//   expressMongo: Buffer
+//   expressMongoose: Buffer
+//   koa: Buffer
+//   koaMongo: Buffer
+//   koaMongoose: Buffer
+// }
+
+export interface IOptions {
+  server?: string
+  database?: string
+  orm?: string
 }
