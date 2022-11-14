@@ -4,7 +4,7 @@ import { readFileSync, existsSync, mkdirSync, cpSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import shell from 'shelljs';
-import cliProgress from 'cli-progress';
+import { progressBar } from './progressBars.js';
 //ES6 <-> CJS __dirname workaround
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,7 +40,9 @@ export function copyTemplate(template) {
         try {
             //synchronous file copy
             cpSync(serverTemplatePath, buildPath, { recursive: true });
-            log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
+            //copyFile(__dirname + '/progressBars.js', buildPath, (() => {}));
+            //log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
+            //child.on('spawn', progressBar);
         }
         catch (error) {
             log(chalk.red('error generating server files'));
@@ -77,10 +79,6 @@ export function copyTemplate(template) {
                 buildPackages(buildPath, packages.expressMongoose);
                 if (installChoice) {
                     installPackages(buildPath);
-                    const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
-                    bar.start(200, 0);
-                    bar.update(100);
-                    bar.stop();
                 }
             }
             catch (error) {
@@ -92,10 +90,6 @@ export function copyTemplate(template) {
     else {
         if (installChoice) {
             installPackages(buildPath);
-            const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
-            bar.start(200, 0);
-            bar.update(100);
-            bar.stop();
         }
     }
     return true;
@@ -114,12 +108,11 @@ function buildPackages(buildPath, data) {
 //TODO Add loader bar to this
 function installPackages(buildPath) {
     shell.cd(buildPath);
-    if (shell.exec('npm i').code === 0) {
-        shell.exit(0);
-    }
+    const child = shell.exec('npm i', { silent: true, async: true });
+    child.on('spawn', progressBar);
 }
 /*
 function onComplete () {
   info(chalk.bgGreenBright('file generated'))
 }
-*/
+*/ 

@@ -1,12 +1,14 @@
 import chalk from 'chalk';
 import path from 'path';
-import { readFileSync, existsSync, mkdirSync, cpSync, writeFileSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, cpSync, writeFileSync, copyFileSync, copyFile } from 'fs';
 import { IBuild, IBuildConfig } from './interfaces.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import shell from 'shelljs';
-import cliProgress from 'cli-progress';
+//import cliProgress, { Preset } from 'cli-progress';
+import _colors from 'ansi-colors';
+import progressBar from './progressBars.js';
 
 //ES6 <-> CJS __dirname workaround
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +16,7 @@ const __dirname = dirname(__filename);
 
 //aesthetic
 const { log, info } = console;
+
 
 //package constants
 //TODO use a new question for this instead, this will get very messy with more template combinations
@@ -58,7 +61,9 @@ export function copyTemplate(template: IBuild) {
     try {
       //synchronous file copy
       cpSync(serverTemplatePath, buildPath, {recursive: true});
-      log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
+      //copyFile(__dirname + '/progressBars.js', buildPath, (() => {}));
+      //log(chalk.yellowBright(`successfully wrote server directory @ ${buildPath}`));
+      //child.on('spawn', progressBar);
     } catch (error: any) {
       log(chalk.red('error generating server files'))
       throw new Error(error);
@@ -93,10 +98,6 @@ export function copyTemplate(template: IBuild) {
         buildPackages(buildPath, packages.expressMongoose);
         if (installChoice){
           installPackages(buildPath)
-          const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
-          bar.start(200, 0);
-          bar.update(100);
-          bar.stop();
         }
       } catch (error: any) {
         log(chalk.red('error generating ORM files'));
@@ -105,15 +106,9 @@ export function copyTemplate(template: IBuild) {
     }
   } else {
     if (installChoice) {
-      installPackages(buildPath);
-      const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
-      bar.start(200, 0);
-      bar.update(100);
-      bar.stop();
+      installPackages(buildPath)
     }
   }
-
-  
   return true;
 };
 
@@ -131,10 +126,8 @@ function buildPackages (buildPath: string, data: Buffer) {
 //TODO Add loader bar to this
 function installPackages (buildPath: string) {
   shell.cd(buildPath);
-  if (shell.exec('npm i').code === 0) {
-    shell.exit(0);
-  }
-  
+  const child = shell.exec('npm i', {silent: true, async: true});
+  child.on('spawn', progressBar)
 }
 
 /*

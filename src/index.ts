@@ -72,10 +72,13 @@ inquirer
       log("something went wrong WHILE COPYING");
       return;
     }
+    
+
   })
   .catch((err) => {
     console.error(err);
-  });
+});
+
 
 // const answers: Record<string, any> = inquirer.prompt(Question);
 
