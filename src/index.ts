@@ -2,30 +2,31 @@
 
 import inquirer from "inquirer";
 import { cwd } from "process";
-import shell from 'shelljs';
+import shell from "shelljs";
 import path from "path";
-import { Question } from "./questionnaire.js"
+import { Question } from "./questionnaire.js";
 import { IBuild, ICliOpts } from "./interfaces.js";
 import { createDirectory, copyTemplate } from "./utils.js";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // const dirname = path.resolve('/usr/local/lib')
-//path.resolve(dirname)) + 
+//path.resolve(dirname)) +
 
 const buildDir = path.resolve(cwd());
 
 const { log } = console;
-const srvPath = path.join(__dirname, '/templates/Server/');
-const dbPath = path.join(__dirname, '/templates/Database/');
-const ormPath = path.join(__dirname, '/templates/ORM/');
+const srvPath = path.join(__dirname, "/templates/Server/");
+const dbPath = path.join(__dirname, "/templates/Database/");
+const ormPath = path.join(__dirname, "/templates/ORM/");
 
-inquirer.prompt(Question)
+inquirer
+  .prompt(Question)
   .then((answers: Record<string, any>) => {
-
     const name = answers["name"];
     const serverTemplate = answers["server-template"];
     const databaseTemplate = answers["database-template"];
@@ -33,10 +34,10 @@ inquirer.prompt(Question)
     const serverTemplatePath = `${srvPath}${serverTemplate}`;
     const databaseTemplatePath = `${dbPath}${databaseTemplate}/${serverTemplate}`;
     const ormTemplatePath = `${ormPath}${ormTemplate}`;
-    const ormChoice = answers["use-orm"]
+    const ormChoice = answers["use-orm"];
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
-    const installChoice = answers['install']
+    const installChoice = answers["install"];
 
     const build: IBuild = {
       serverTemplate,
@@ -48,8 +49,8 @@ inquirer.prompt(Question)
       ormChoice,
       databaseChoice,
       buildPath,
-      installChoice
-    }
+      installChoice,
+    };
 
     const options: ICliOpts = {
       name,
@@ -60,22 +61,21 @@ inquirer.prompt(Question)
       databaseTemplatePath,
       ormTemplatePath,
       buildPath,
-    }
-      //create directory
+    };
+    //create directory
     if (!createDirectory(options.name)) {
-      log('something went wrong')
+      log("something went wrong");
       return;
     }
     //populate directory based on input templates
     if (!copyTemplate(build)) {
-        log('something went wrong WHILE COPYING')
+      log("something went wrong WHILE COPYING");
       return;
     }
-    
   })
   .catch((err) => {
     console.error(err);
-});
+  });
 
 // const answers: Record<string, any> = inquirer.prompt(Question);
 

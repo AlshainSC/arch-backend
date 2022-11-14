@@ -6,6 +6,7 @@ import { IBuild, IBuildConfig } from './interfaces.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import shell from 'shelljs';
+import cliProgress from 'cli-progress';
 
 //ES6 <-> CJS __dirname workaround
 const __filename = fileURLToPath(import.meta.url);
@@ -92,6 +93,10 @@ export function copyTemplate(template: IBuild) {
         buildPackages(buildPath, packages.expressMongoose);
         if (installChoice){
           installPackages(buildPath)
+          const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
+          bar.start(200, 0);
+          bar.update(100);
+          bar.stop();
         }
       } catch (error: any) {
         log(chalk.red('error generating ORM files'));
@@ -101,6 +106,10 @@ export function copyTemplate(template: IBuild) {
   } else {
     if (installChoice) {
       installPackages(buildPath);
+      const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
+      bar.start(200, 0);
+      bar.update(100);
+      bar.stop();
     }
   }
 

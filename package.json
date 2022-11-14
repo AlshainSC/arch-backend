@@ -28,10 +28,12 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.1.2",
+    "cli-progress": "^3.11.2",
     "inquirer": "^9.1.4",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
+    "@types/cli-progress": "^3.11.0",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.11.9",
     "@types/shelljs": "^0.8.11"

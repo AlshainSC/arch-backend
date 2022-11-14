@@ -4,18 +4,19 @@ import { cwd } from "process";
 import path from "path";
 import { Question } from "./questionnaire.js";
 import { createDirectory, copyTemplate } from "./utils.js";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 // const dirname = path.resolve('/usr/local/lib')
-//path.resolve(dirname)) + 
+//path.resolve(dirname)) +
 const buildDir = path.resolve(cwd());
 const { log } = console;
-const srvPath = path.join(__dirname, '/templates/Server/');
-const dbPath = path.join(__dirname, '/templates/Database/');
-const ormPath = path.join(__dirname, '/templates/ORM/');
-inquirer.prompt(Question)
+const srvPath = path.join(__dirname, "/templates/Server/");
+const dbPath = path.join(__dirname, "/templates/Database/");
+const ormPath = path.join(__dirname, "/templates/ORM/");
+inquirer
+    .prompt(Question)
     .then((answers) => {
     const name = answers["name"];
     const serverTemplate = answers["server-template"];
@@ -27,7 +28,7 @@ inquirer.prompt(Question)
     const ormChoice = answers["use-orm"];
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
-    const installChoice = answers['install'];
+    const installChoice = answers["install"];
     const build = {
         serverTemplate,
         databaseTemplate,
@@ -38,7 +39,7 @@ inquirer.prompt(Question)
         ormChoice,
         databaseChoice,
         buildPath,
-        installChoice
+        installChoice,
     };
     const options = {
         name,
@@ -52,12 +53,12 @@ inquirer.prompt(Question)
     };
     //create directory
     if (!createDirectory(options.name)) {
-        log('something went wrong');
+        log("something went wrong");
         return;
     }
     //populate directory based on input templates
     if (!copyTemplate(build)) {
-        log('something went wrong WHILE COPYING');
+        log("something went wrong WHILE COPYING");
         return;
     }
 })
