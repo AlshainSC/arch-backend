@@ -1,0 +1,16 @@
+{
+  "name": "koa-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "alshain",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "koa": "latest",
+    "koa-bodyparser": "latest",
+    "koa-router": "latest",
+    "koa-static": "latest",
+    "@koa/cors": "latest",
+    "pg": "latest"
+  }
+}

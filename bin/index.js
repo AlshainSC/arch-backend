@@ -24,7 +24,7 @@ inquirer
     const ormTemplate = answers["orm-template"];
     const serverTemplatePath = `${srvPath}${serverTemplate}`;
     const databaseTemplatePath = `${dbPath}${databaseTemplate}/${serverTemplate}`;
-    const ormTemplatePath = `${ormPath}${ormTemplate}`;
+    const ormTemplatePath = `${ormPath}${ormTemplate}/${serverTemplate}`;
     const ormChoice = answers["use-orm"];
     const databaseChoice = answers["use-database"];
     const buildPath = `${buildDir}/${name}`;
