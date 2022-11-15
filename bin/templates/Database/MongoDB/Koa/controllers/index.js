@@ -1,4 +1,6 @@
 'use strict';
+//TODO HAS NOT BEEN TESTED YET
+//TODO IMPLEMENT DELETE/PUT
 
 const models = require('../models/model');
 

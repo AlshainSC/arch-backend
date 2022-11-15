@@ -1,6 +1,9 @@
 'use strict'
 const collection = require('../models/index');
 
+//TODO HAS NOT BEEN TESTED YET
+//TODO ADD PUT/DELETE
+
 //RETRIEVE ALL DATA FROM SPECIFIED COLLECTION
 exports.getAll = async () => {
   try {

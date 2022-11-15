@@ -1,10 +1,13 @@
 'use strict';
 
+//TODO HAS NOT BEEN TESTED YET
+//TODO IMPLEMENT DELETE/PUT
+
 const db = require('../models');
 
 exports.getAll = async ctx => {
   try {
-    ctx.body = await db.Message.findAll();
+    ctx.body = await db.Model.findAll();
   } catch (e) {
     ctx.status = 500;
     // Further handle your error on the back-end
@@ -12,11 +15,11 @@ exports.getAll = async ctx => {
 };
 
 exports.post = async ctx => {
-  const msg = ctx.request.body;
+  const request = ctx.request.body;
   try {
-    await db.Message.create({
-      authorId: msg.authorId,
-      content: msg.content
+    await db.Model.create({
+      id: request.id,
+      content: request.content
     });
     ctx.status = 200;
   } catch (e) {

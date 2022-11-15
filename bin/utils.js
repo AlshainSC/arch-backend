@@ -9,7 +9,7 @@ import progressBar from './progressBars.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 //aesthetic
-const { log, info } = console;
+const { log } = console;
 export function createDirectory(path) {
     if (existsSync(path)) {
         log(chalk.red(`folder "${path}" already exists`));

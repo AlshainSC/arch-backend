@@ -1,5 +1,8 @@
 'use strict';
 
+//TODO HAS NOT BEEN TESTED YET
+//TODO IMPLEMENT DELETE/PUT
+
 const model = require('../models/model.js');
 
 exports.getAll = async ctx => {

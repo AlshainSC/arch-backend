@@ -1,7 +1,9 @@
 'use strict';
 
+//TODO HAS NOT BEEN TESTED YET
+
 module.exports = (sequelize, DataTypes) => sequelize.define('Model', {
-  authorId: {
+  id: {
     type: DataTypes.BOOLEAN,
     allowNull: false
   },

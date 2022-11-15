@@ -5,6 +5,8 @@ const controller = require('./controllers/index');
 //setup
 const router = new Router();
 //endpoints
-router.get(/*ENDPOINTS*/ , controller.getAll);
-router.post(/*ENDPOINTS*/ , controller.postDocument);
+router.get('/ENDPOINT' , controller.getAll);
+router.post('/ENDPOINT' , controller.postDocument);
+router.delete('/ENDPOINT/:_id', controller.deleteDocument);
+router.put('/ENDPOINT/:_id', controller.updateDocument);
 module.exports = router;

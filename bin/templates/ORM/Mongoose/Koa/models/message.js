@@ -1,11 +1,13 @@
 'use strict';
 
+//TODO HAS NOT BEEN TESTED YET
+
 const mongoose = require('./index');
 
 const Schema = mongoose.Schema;
 
 const modelSchema = new Schema({
-  authorId: Boolean,
+  id: Boolean,
   content: String,
   timestamp: {
     type: Number,

@@ -1,9 +1,10 @@
 import shell from "shelljs";
-import cliProgress from "cli-progress";
+import cliProgress, { Options } from "cli-progress";
 import _colors from "ansi-colors";
 import chalk from "chalk";
+import fs from 'fs';
 const { log } = console;
-const bar = new cliProgress.Bar({}, cliProgress.Presets.shades_grey || cliProgress.Presets.legacy);
+//const bar = new cliProgress.Bar({}, cliProgress.Presets.shades_grey || cliProgress.Presets.legacy);
 
 // export default function progressBar () {
     
@@ -36,12 +37,40 @@ export default function progressBar() {
         barCompleteChar: "\u2588",
         barIncompleteChar: "\u2591",
         hideCursor: true,
+        
     });
+
+    //let received: number = 0;
+
+    // const child = shell.exec('npm i', {silent: true, async: true})
+    // //@ts-ignore
+    // // child.stdio.('data', (data: any) => {
+    // //         const total = data.Socket._writeableState.highWaterMark;
+    // //         log('total: ', total)
+    // //         b1.start(total, 0);
+    // //     })
+    // //     .on('data', (chunk: any) => {
+    // //         received += chunk.length;
+    // //         log('chunks received: ', received)
+    // //         b1.update(received);
+    // //     })
+    // //     .on('finish', () => {
+    // //         b1.stop();
+    // //         onComplete();
+    // //     })
+
+    // log('num processes: ', child.stdio.length)
+    // //@ts-ignore
+    // log('ended: ', child.stdio[0]._readableState.ended)
+    // log('stdout: ', child.stdout);
+
+
+
 
     // initialize the bar -  defining payload token "speed" with the default value "N/A"
     b1.start(200, 0);
 
-    // the bar value - will be linear incremented
+    //the bar value - will be linear incremented
     let value = 0;
 
     // 20ms update rate
@@ -76,7 +105,7 @@ function onComplete () {
 
 
 
-    
+
 // export const progressBar = () => {
 //   let n = 0;
 //   let time = 100;

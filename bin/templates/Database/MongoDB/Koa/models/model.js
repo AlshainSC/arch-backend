@@ -1,4 +1,5 @@
 'use strict';
+//TODO HAS NOT BEEN TESTED YET
 
 const client = require('./index');
 

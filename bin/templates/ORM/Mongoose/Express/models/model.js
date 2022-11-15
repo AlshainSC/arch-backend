@@ -1,7 +1,6 @@
 const mongoose = require('./index');
 const Schema = mongoose.Schema;
-const /*NAME OF MODEL*/ = mongoose.model(
-  /*NAME OF MODEL ,
+const model = mongoose.model( /*NAME OF MODEL ,
   Schema({
     -->CREATE YOUR SCHEMA
     -->EX:
@@ -12,4 +11,4 @@ const /*NAME OF MODEL*/ = mongoose.model(
     auth: Boolean
   })*/
 );
-module.exports = /*NAME OF MODEL*/;
+module.exports = model;
