@@ -33,11 +33,11 @@ To run the tool:
 
 ===========================================  
 
-# VERY IMPORTANT NOTE
+## VERY IMPORTANT NOTE
 This package is in its early stages.  Current templates generated are very basic boilerplate and HAVE NOT YET BEEN TESTED.  
 If you would like to contribute to this project or raise an issue, please see: https://github.com/AlshainSC/arch-backend  
   
-If you like this project and would like to support the poor and exhausted student developing it, please see:  https://ko-fi.com/alshain
+If you like this project and would like to support its development, please see:  https://ko-fi.com/alshain
 ===========================================  
 
 ## TODOS 11.11.22
